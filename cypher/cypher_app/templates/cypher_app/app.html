@@ -1,0 +1,75 @@
+{% extends 'cypher_app/base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+
+<div class="card m-5">
+
+  <div class="card-header">
+    {% if is_mobile %}
+        {% include 'cypher_app/app_card_header_dropdown.html' %}
+    {% else %}
+        {% include 'cypher_app/app_card_header_nav.html' %}
+    {% endif %}
+  </div>
+
+  <div class="card-body">
+    <form action="{{ request.path }}" method="post">
+
+        {% csrf_token %}
+
+        {% bootstrap_field form.text %}
+
+        {% if request.path == "/app/caesar_cipher/" %}
+            {% bootstrap_field form.key %}
+        {% endif %}
+
+        {% bootstrap_field form.operation %}
+
+        {% buttons %}
+            <button name="submit" class="btn btn-primary">
+                Submit
+            </button>
+        {% endbuttons %}
+
+        <hr />
+
+        <ul class="list-group">
+          {% if output_text.0 == 1 %}
+            <li class="list-group-item list-group-item-danger">
+                {{ output_text.1 }}
+            </li>
+
+          {% elif output_text.0 == 0 %}
+            <li class="list-group-item list-group-item-success">
+                {{ output_text.1 }}
+            </li>
+
+          {% else %}
+            <li class="list-group-item list-group-item-primary">
+                Output text appears here.
+            </li>
+          {% endif %}
+        </ul>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div class="card m-5">
+  <div class="card-body">
+    {% if request.path == '/app/binary/' %}
+        {% include 'cypher_app/app_about_binary.html' %}
+    {% elif request.path == '/app/caesar_cipher/' %}
+        {% include 'cypher_app/app_about_caesar_cipher.html' %}
+    {% elif request.path == '/app/morse_code/' %}
+        {% include 'cypher_app/app_about_morse_code.html' %}
+    {% elif request.path == '/app/pig_latin/' %}
+        {% include 'cypher_app/app_about_pig_latin.html' %}
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

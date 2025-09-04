@@ -1,0 +1,73 @@
+{% load bootstrap4 %}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta 
+		name="viewport" 
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>
+		Cypher
+	</title>
+
+	{% bootstrap_css %}
+	{% bootstrap_javascript jquery='full' %}
+</head>
+
+<body class="bg-light">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+	  <a class="navbar-brand" href="{% url 'cypher_app:index' %}">
+	  	Cypher
+	  </a>
+
+	  <button 
+	  	class="navbar-toggler" 
+	  	type="button" 
+	  	data-toggle="collapse" 
+	  	data-target="#navbarNavAltMarkup" 
+	  	aria-controls="navbarNavAltMarkup" 
+	  	aria-expanded="false" 
+	  	aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+	      <a 
+	      	class="
+				{% if request.path == '/app/binary/' %}
+	      			nav-item nav-link active
+	      		{% else %}
+	      			nav-item nav-link
+	      		{% endif %}" 
+	      	href="{% url 'cypher_app:index' %}">
+	      		Home
+	      </a>
+
+	      <a
+	      	class="
+				{% if request.path == '/about/' %}
+	      			nav-item nav-link active
+	      		{% else %}
+	      			nav-item nav-link
+	      		{% endif %}" 
+	      	href="{% url 'cypher_app:about' %}">
+	      		About
+	  	  </a>
+	    </div>
+	  </div>
+	</nav>
+
+	{% block body %}
+	{% endblock %}
+
+	<div class="jumbotron jumbotron-fluid">
+	  <div class="container">
+	    <p class="lead"><strong>MIT License</strong></p>
+
+	    <p class="lead">Copyright © 2021 Francis Langit</p>
+	  </div>
+	</div>
+</body>
